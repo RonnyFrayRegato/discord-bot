@@ -1,3 +1,5 @@
+import sys
+import time
 import discord
 from discord.ext import commands
 
@@ -16,4 +18,6 @@ async def ping(ctx): # ctx is content or context
     await ctx.send("Pong")
 
 # runs the bot using security token
-bot.run("__DISCORD_TOKEN__")    # replace with Discord token
+bot.run(sys.argv[1])    # replace with Discord token
+
+time.sleep(10)
