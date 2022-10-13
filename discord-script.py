@@ -21,6 +21,4 @@ async def shutdown(ctx):
     await bot.close()
 
 # runs the bot using security token
-bot.run("MTAyOTk2NDAyODYwMjI0MTA3NQ.Gnk2JP.LButpXLS7A1pzOKNO8bWsdW7hJPTTWMugPdLSc")    # replace with Discord token
-
-
+bot.run("__DISCORD_TOKEN__")    # replace with Discord token
