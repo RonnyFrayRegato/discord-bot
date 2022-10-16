@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-
+import scraping_google_images
 # discord 2.0 requires intents
 
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
@@ -19,6 +19,10 @@ async def ping(ctx): # ctx is content or context
 async def shutdown(ctx):
     await ctx.send("bot is offline")
     await bot.close()
+
+@bot.command()
+async def image(ctx):
+    await scraping_google_images.main(ctx)
 
 # runs the bot using security token
 bot.run("__DISCORD_TOKEN__")    # replace with Discord token
