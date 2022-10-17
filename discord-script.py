@@ -17,6 +17,8 @@ async def ping(ctx): # ctx is content or context
 
 @bot.command()
 async def shutdown(ctx):
+    await scraping_google_images.main(ctx)
+    await scraping_google_images.quit_wd(ctx)
     await ctx.send("bot is offline")
     await bot.close()
 
@@ -25,4 +27,4 @@ async def image(ctx):
     await scraping_google_images.main(ctx)
 
 # runs the bot using security token
-bot.run("__DISCORD_TOKEN__")    # replace with Discord token
+bot.run("MTAyOTk2NDAyODYwMjI0MTA3NQ.G3V5J-.aWkeFy0QRHscNSc_ecRZk6xKCALGjAIzPEHn7I")    # replace with Discord token
