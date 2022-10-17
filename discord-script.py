@@ -17,4 +17,4 @@ async def ping(ctx): # ctx is content or context
     await ctx.send("Pong")
 
 # runs the bot using security token
-bot.run("MTAyOTk2NDAyODYwMjI0MTA3NQ.GYV45j.WewDCNINvI_Npyc-OzkI_MhCd5eqIC4VEfsCmw")    # replace with Discord token
+bot.run("__DISCORD_TOKEN__")    # replace with Discord token
