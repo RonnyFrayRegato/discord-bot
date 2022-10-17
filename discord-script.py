@@ -27,4 +27,4 @@ async def image(ctx):
     await scraping_google_images.main(ctx)
 
 # runs the bot using security token
-bot.run("MTAyOTk2NDAyODYwMjI0MTA3NQ.G3V5J-.aWkeFy0QRHscNSc_ecRZk6xKCALGjAIzPEHn7I")    # replace with Discord token
+bot.run("__DISCORD_TOKEN__")    # replace with Discord token
