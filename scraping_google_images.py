@@ -1,6 +1,6 @@
-# tutorial form https://www.youtube.com/watch?v=7KhuEsq-I8o
-
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import requests
 import io
@@ -8,12 +8,12 @@ from PIL import Image
 import time
 import os
 
-# Driver for chrome = ChromeDriver
-PATH = r'C:\Users\Andrew Wilhelm\OneDrive - Florida Gulf Coast University\4th year 2022-2023\Fall 2022\CNT 4104 Software Proj Comp Networks\seleniumImage\Chrome Driver\chromedriver.exe'
-wd = webdriver.Chrome(executable_path=PATH)
+# Driver for ChromeDriver
+service = ChromeService(ChromeDriverManager().install())
+wd = webdriver.Chrome(service=service)
 
 
-# Get and list images from google
+# Get and list images from Google
 def get_images_from_google(wd, delay, max_images, url):
     def scroll_down(wd):
         wd.execute_script('window.scrollTo(0, document.body.scrollHeight);')
@@ -69,7 +69,6 @@ def download_image(down_path, url, file_name, image_type='png', verbose=True):
         print(f'unable to download image from google using driver due to\n:{str(e)}')
 
 
-# if __name__ == '__main__':
 async def main(ctx):
     # Google Photos URL
     google_urls = [
