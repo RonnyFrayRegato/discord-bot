@@ -10,14 +10,15 @@ class DiscordBot(discord.Client):
 
     # bot syncs slash commands on startup
     async def on_ready(self):
-        await tree.sync(guild=discord.Object(
-            id=1030163730538954853))  # without this the slash commands will not instantly update (encrypt later)
+        await tree.sync(guild=discord.Object(server_id))  # causes slash commands to refresh on bot startup
         self.synced = True
         print("Bot is online")
 
 
+# Global variables
 bot = DiscordBot()
 tree = app_commands.CommandTree(bot)
+server_id = 1030163730538954853
 
 
 @bot.event
@@ -38,13 +39,13 @@ async def hello(interaction: discord.Interaction):
 
 
 # shows latency between bot and discord server
-@tree.command(name="ping", description="pings the user", guild=discord.Object(id=1030163730538954853))
+@tree.command(name="ping", description="pings the user", guild=discord.Object(server_id))
 async def self(interaction: discord.Interaction):
     await interaction.response.send_message(f"Pong! Latency: {round(bot.latency * 1000)}ms")
 
 
 # gets a user question and replies with a random response.
-@tree.command(name="eightball", description="fun game", guild=discord.Object(id=1030163730538954853))
+@tree.command(name="eightball", description="fun game", guild=discord.Object(server_id))
 async def self(interaction: discord.Interaction, question: str):
     responses = ["Wow that's a bad idea", "Come on dude, that's ridiculous", "Better not tell you now", "Yes", "No",
                  "Signs point to yes"
@@ -56,7 +57,7 @@ async def self(interaction: discord.Interaction, question: str):
     await interaction.response.send_message(f"**Question:** {question}\n**Answers:** {random.choice(responses)}")
 
 
-@tree.command(name="shutdown", description="turn the bot off", guild=discord.Object(id=1030163730538954853))
+@tree.command(name="shutdown", description="turn the bot off", guild=discord.Object(server_id))
 async def self(interaction: discord.Interaction):
     print("Bot is offline")
     await interaction.response.send_message("Bot is offline")
@@ -64,4 +65,4 @@ async def self(interaction: discord.Interaction):
 
 
 # runs the bot using security token
-bot.run("__DISCORD_TOKEN__")
+bot.run("MTAyOTk2NDAyODYwMjI0MTA3NQ.G-nwbP.7eVv9Z7SehCA8TtO0n4y_MFb0GSsZbDgIQ4DRg")
