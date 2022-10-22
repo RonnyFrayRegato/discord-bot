@@ -65,4 +65,4 @@ async def self(interaction: discord.Interaction):
 
 
 # runs the bot using security token
-bot.run("MTAyOTk2NDAyODYwMjI0MTA3NQ.G-nwbP.7eVv9Z7SehCA8TtO0n4y_MFb0GSsZbDgIQ4DRg")
+bot.run("__DISCORD_TOKEN__")
