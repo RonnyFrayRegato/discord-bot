@@ -47,8 +47,6 @@ def get_images_from_google(wd, delay, max_images, url):
 
     return image_urls
 
-    # Download the images
-
 
 def download_image(down_path, url, file_name, image_type='png', verbose=True):
     try:
