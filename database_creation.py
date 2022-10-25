@@ -4,6 +4,7 @@ import sys
 #run this command in linux to start the docker container with maria db
     #docker run -d -p 3306:3306 -e MYSQL_DATABASE=example -e MYSQL_ROOT_PASSWORD=password -e TZ=America/Los_Angeles --name mdb103 mariadb:10.3
 
+global curr
 
 def connect_to_db():
     try:
@@ -19,3 +20,10 @@ def connect_to_db():
         print(f"Error connecting to MariaDB Platform: {e}")
         sys.exit(1)
     cur = conn.cursor()
+    show_databases(cur)
+
+def show_databases(cur):
+    cur.execute("SHOW DATABASES")
+
+    for x in cur:
+      print(x)
