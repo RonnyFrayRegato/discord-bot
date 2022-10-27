@@ -1,16 +1,20 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.chrome.service import Service as ChromeService
+# from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import requests
 import io
 from PIL import Image
 import time
 import os
+import discord
+from discord import app_commands
 
 # Driver for ChromeDriver
-service = ChromeService(ChromeDriverManager().install())
-wd = webdriver.Chrome(service=service)
+# service = ChromeService(ChromeDriverManager().install())
+# wd = webdriver.Chrome(service=service)
+PATH = r'C:\Users\andre\network-project\discord-bot\Chrome Driver\chromedriver.exe'
+wd = webdriver.Chrome(executable_path=PATH)
 
 
 # Get and list images from Google
@@ -67,10 +71,11 @@ def download_image(down_path, url, file_name, image_type='png', verbose=True):
         print(f'unable to download image from google using driver due to\n:{str(e)}')
 
 
-async def main(ctx):
+async def main(phrase):
+    print(phrase)
     # Google Photos URL
     google_urls = [
-        'https://www.google.com/search?q=As+student+veterans+at+FGCU,+united+they+stand+-+FGCU+360&rlz=1C1MSIM_enUS959US959&sxsrf=ALiCzsaAMQ51N8Ig8AsQPVdwG94OU-9ShA:1665965132285&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiR3avf--X6AhUgZTABHamQDlsQ_AUoAnoECAIQBA&biw=1920&bih=979&dpr=1'
+        'https://www.google.com/search?q=image&hl=EN&tbm=isch&sxsrf=ALiCzsZP3mx80Mnco6UIEPc30uuVJk85eA%3A1666795946831&source=hp&biw=1536&bih=841&ei=qklZY7uDMI-HwbkPiNecoAY&iflsig=AJiK0e8AAAAAY1lXupzXjhc4ETuXivWognraRhHmNkiF&ved=0ahUKEwi7gMnikv76AhWPQzABHYgrB2QQ4dUDCAc&uact=5&oq=image&gs_lcp=CgNpbWcQAzIICAAQgAQQsQMyCAgAEIAEELEDMggIABCABBCxAzIICAAQgAQQsQMyBQgAEIAEMggIABCABBCxAzIICAAQgAQQsQMyCAgAEIAEELEDMggIABCABBCxAzIICAAQgAQQsQM6BAgjECc6CAgAELEDEIMBUABYlQlghg9oAHAAeACAAX6IAdkCkgEDNC4xmAEAoAEBqgELZ3dzLXdpei1pbWc&sclient=img'
     ]
 
     # label for my item
@@ -93,13 +98,16 @@ async def main(ctx):
         urls = get_images_from_google(wd, 0.2, TOTAL_NUMBER_OF_EXAMPLES, url_current)
 
         for i, url in enumerate(urls):
-            await ctx.send(url)
+            url = url
+            return url
+            # await interaction.phrase.send(url)
+            # await interaction.url.send(url)
+
             """download_image(down_path=f'images/Ronny/{lbl}/',
                            url=url,
                            file_name=str(i + 1) + '.png',
                            verbose=True)"""
-    # await ctx.send("made it to the end")
 
 
-async def quit_wd(ctx):
+async def quit_wd():
     wd.quit()  # kil web driver
