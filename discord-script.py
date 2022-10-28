@@ -1,10 +1,7 @@
 import random
 import discord
-import scraping_google_images
 from discord import app_commands
-from discord.ext import commands
 import database-creation
-
 
 class DiscordBot(discord.Client):
     def __init__(self):
@@ -65,14 +62,6 @@ async def self(interaction: discord.Interaction):
     print("Bot is offline")
     await interaction.response.send_message("Bot is offline")
     await tree.client.close()
-
-
-bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
-
-
-@bot.command()
-async def image(ctx):
-    await scraping_google_images.main(ctx)
 
 
 # runs the bot using security token
