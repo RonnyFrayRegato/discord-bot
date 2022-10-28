@@ -1,7 +1,7 @@
 import random
 import discord
 from discord import app_commands
-
+import database-creation
 
 class DiscordBot(discord.Client):
     def __init__(self):
@@ -13,7 +13,7 @@ class DiscordBot(discord.Client):
         await tree.sync(guild=discord.Object(server_id))  # causes slash commands to refresh on bot startup
         self.synced = True
         print("Bot is online")
-
+        database-creation.connect_to_db()
 
 # Global variables
 bot = DiscordBot()
