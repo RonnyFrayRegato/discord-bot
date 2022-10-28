@@ -1,46 +1,44 @@
-from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service as ChromeService
-# from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
+import time
+import os
 import requests
 import io
 from PIL import Image
-import time
-import os
-import discord
-from discord import app_commands
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
 
 # Driver for ChromeDriver
-# service = ChromeService(ChromeDriverManager().install())
-# wd = webdriver.Chrome(service=service)
-PATH = r'C:\Users\andre\network-project\discord-bot\Chrome Driver\chromedriver.exe'
-wd = webdriver.Chrome(executable_path=PATH)
+service = ChromeService(ChromeDriverManager().install())
+wd = webdriver.Chrome(service=service)
 
 
 # Get and list images from Google
-def get_images_from_google(wd, delay, max_images, url):
-    def scroll_down(wd):
-        wd.execute_script('window.scrollTo(0, document.body.scrollHeight);')
+def get_images_from_google(webd, delay, max_images, url):
+    def scroll_down(wdrive):
+        wdrive.execute_script('window.scrollTo(0, document.body.scrollHeight);')
         time.sleep(delay)
 
     url = url
-    wd.get(url)
+    webd.get(url)
 
     image_urls = set()
     skips = 0
 
     while len(image_urls) + skips < max_images:
-        scroll_down(wd)
-        thumbnails = wd.find_elements(By.CLASS_NAME, 'Q4LuWd')
+        scroll_down(webd)
+        thumbnails = webd.find_elements(By.CLASS_NAME, 'Q4LuWd')
 
         for img in thumbnails[len(image_urls) + skips:max_images]:
             try:
                 img.click()
                 time.sleep(delay)
-            except:
+            except Exception as e:
+                print(e)
                 continue
             # n3VNCb is to get link to image
-            images = wd.find_elements(By.CLASS_NAME, 'n3VNCb')
+            images = webd.find_elements(By.CLASS_NAME, 'n3VNCb')
             for image in images:
                 if image.get_attribute('src') in image_urls:
                     max_images += 1
@@ -65,17 +63,20 @@ def download_image(down_path, url, file_name, image_type='png', verbose=True):
         with open(file_pth, 'wb') as file:
             image.save(file, image_type)
 
-        if verbose == True:
+        if verbose:
             print(f'TheImage: {file_pth}downloaded successfully')
     except Exception as e:
         print(f'unable to download image from google using driver due to\n:{str(e)}')
 
 
-async def main(phrase):
-    print(phrase)
+async def main(ctx):
     # Google Photos URL
     google_urls = [
-        'https://www.google.com/search?q=image&hl=EN&tbm=isch&sxsrf=ALiCzsZP3mx80Mnco6UIEPc30uuVJk85eA%3A1666795946831&source=hp&biw=1536&bih=841&ei=qklZY7uDMI-HwbkPiNecoAY&iflsig=AJiK0e8AAAAAY1lXupzXjhc4ETuXivWognraRhHmNkiF&ved=0ahUKEwi7gMnikv76AhWPQzABHYgrB2QQ4dUDCAc&uact=5&oq=image&gs_lcp=CgNpbWcQAzIICAAQgAQQsQMyCAgAEIAEELEDMggIABCABBCxAzIICAAQgAQQsQMyBQgAEIAEMggIABCABBCxAzIICAAQgAQQsQMyCAgAEIAEELEDMggIABCABBCxAzIICAAQgAQQsQM6BAgjECc6CAgAELEDEIMBUABYlQlghg9oAHAAeACAAX6IAdkCkgEDNC4xmAEAoAEBqgELZ3dzLXdpei1pbWc&sclient=img'
+        'https://www.google.com/search?q=cortana&tbm=isch&ved=2ahUKEwinieej8IH7AhXewCkDHcIUBlcQ2-cCegQIABAA&oq=cortana'
+        '&gs_lcp=CgNpbWcQAzIECCMQJzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEO'
+        'gQIABBDOggIABCxAxCDAToICAAQgAQQsQM6CggAELEDEIMBEEM6BwgAELEDEEM6CwgAEIAEELEDEIMBUPwFWKsOYMgPaABwAHgAgAE5iAGSA'
+        '5IBATiYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=Xz5bY-fdEt6Bp8kPwqmYuAU&bih=979&biw=1920&rlz=1C1MSIM_enU'
+        'S959US959'
     ]
 
     # label for my item
@@ -93,20 +94,12 @@ async def main(phrase):
             os.makedirs(item_path + lbl)
 
     # loop through the Google urls and labels lists and get the images
-    TOTAL_NUMBER_OF_EXAMPLES = 1
+    total_number_of_examples = 1
     for url_current, lbl in zip(google_urls, labels):
-        urls = get_images_from_google(wd, 0.2, TOTAL_NUMBER_OF_EXAMPLES, url_current)
+        urls = get_images_from_google(wd, 0.2, total_number_of_examples, url_current)
 
         for i, url in enumerate(urls):
-            url = url
-            return url
-            # await interaction.phrase.send(url)
-            # await interaction.url.send(url)
-
-            """download_image(down_path=f'images/Ronny/{lbl}/',
-                           url=url,
-                           file_name=str(i + 1) + '.png',
-                           verbose=True)"""
+            await ctx.send(url)
 
 
 async def quit_wd():

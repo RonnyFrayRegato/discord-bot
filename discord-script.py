@@ -2,6 +2,7 @@ import random
 import discord
 import scraping_google_images
 from discord import app_commands
+from discord.ext import commands
 
 
 class DiscordBot(discord.Client):
@@ -58,20 +59,20 @@ async def self(interaction: discord.Interaction, question: str):
     await interaction.response.send_message(f"**Question:** {question}\n**Answers:** {random.choice(responses)}")
 
 
-@tree.command(name="image", description="Generate Image of Google", guild=discord.Object(server_id))
-async def self(interaction: discord.Interaction, phrase: str):
-    await scraping_google_images.main(phrase)
-    await interaction.response.send_message
-    # await interaction.response(image)
-
-
 @tree.command(name="shutdown", description="turn the bot off", guild=discord.Object(server_id))
 async def self(interaction: discord.Interaction):
-    await scraping_google_images.quit_wd()
     print("Bot is offline")
     await interaction.response.send_message("Bot is offline")
     await tree.client.close()
 
 
+bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+
+
+@bot.command()
+async def image(ctx):
+    await scraping_google_images.main(ctx)
+
+
 # runs the bot using security token
-bot.run("MTAyOTk2NDAyODYwMjI0MTA3NQ.GvtrlY.p5ZNJxGFfLEWWeN1OozE-yzTX6hXkP3qTwqtjk")
+bot.run("__Discord_Token__")
