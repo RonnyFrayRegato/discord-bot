@@ -54,7 +54,7 @@ def download_image(down_path, url, file_name, image_type='png', verbose=True):
     try:
         # get image
         image_content = requests.get(url).content
-        # get the IO output bytes fo the image
+        # get the IO output bytes for the image
         img_file = io.BytesIO(image_content)
         # store file in mem and covert to image file with PIL(pillow package)
         image = Image.open(img_file)
