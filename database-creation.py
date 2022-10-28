@@ -1,4 +1,3 @@
-
 import mariadb
 import sys
 #run this command in linux to start the docker container with maria db
@@ -22,8 +21,12 @@ def connect_to_db():
     cur = conn.cursor()
     show_databases(cur)
 
+
+
 def show_databases(cur):
     cur.execute("SHOW DATABASES")
 
-    for x in cur:
-      print(x)
+    for database in cur:
+      print(database)
+
+
