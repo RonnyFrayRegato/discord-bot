@@ -103,4 +103,4 @@ async def main(ctx):
 
 
 async def quit_wd():
-    wd.quit()  # kil web driver
+    wd.quit()  # kill web driver
