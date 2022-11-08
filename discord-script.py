@@ -1,10 +1,7 @@
 import random
 import discord
-import scraping_google_images
 from discord import app_commands
-from discord.ext import commands
-import database-creation
-
+import database_creation
 
 class DiscordBot(discord.Client):
     def __init__(self):
@@ -16,7 +13,7 @@ class DiscordBot(discord.Client):
         await tree.sync(guild=discord.Object(server_id))  # causes slash commands to refresh on bot startup
         self.synced = True
         print("Bot is online")
-        database-creation.connect_to_db()
+        database_creation.connect_to_db()
 
 # Global variables
 bot = DiscordBot()
@@ -35,6 +32,11 @@ async def on_member_remove(member):
     channel = member.guild.system_channel
     await channel.send(f"Goodbye {member.mention}!")
 
+@bot.event
+async def on_message(message):
+    database_creation.update_message_count(message.author.id)
+    channel = message.guild.system_channel
+    await channel.send("+1 XP")
 
 @tree.command(name="hello", description="says a greeting")
 async def hello(interaction: discord.Interaction):
@@ -63,17 +65,10 @@ async def self(interaction: discord.Interaction, question: str):
 @tree.command(name="shutdown", description="turn the bot off", guild=discord.Object(server_id))
 async def self(interaction: discord.Interaction):
     print("Bot is offline")
+    database_creation.conn.close()  # close DB connection
     await interaction.response.send_message("Bot is offline")
     await tree.client.close()
 
 
-bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
-
-
-@bot.command()
-async def image(ctx):
-    await scraping_google_images.main(ctx)
-
-
 # runs the bot using security token
-bot.run("__DISCORD_TOKEN__")
+bot.run("TOKEN")
