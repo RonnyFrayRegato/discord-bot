@@ -8,7 +8,7 @@ The project uses MariaDB as the database. A continuous integration (CI) pipeline
 the project on every commit to the repository utilizing GitHub Actions. The following are the current functionalities of
 the Discord bot:
 
-### Functionalities
+## Functionalities
 
 - Basic Functions:
   - Hello Command: displays a greeting to the user
@@ -31,3 +31,6 @@ Generate a MariaDB Docker Container and Create the Database Instance for the Dis
  ```
  docker run -d -p 3306:3306 -e MYSQL_DATABASE=DB_NAME -e MYSQL_ROOT_PASSWORD=ROOT_PW --name mdb103 mariadb:10.3
  ```
+ 
+## Demonstration
+![discord-bot](https://user-images.githubusercontent.com/71354370/202879000-b2af02d8-916e-4ad3-9ad0-35fa4952ae29.gif)
