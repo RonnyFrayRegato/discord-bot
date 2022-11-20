@@ -3,7 +3,7 @@ import discord
 import scraping_google_images
 from discord import app_commands
 from discord.ext import commands
-import database-creation
+import database_creation
 
 
 class DiscordBot(discord.Client):
