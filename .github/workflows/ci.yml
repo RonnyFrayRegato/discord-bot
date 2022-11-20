@@ -48,6 +48,6 @@ jobs:
         ./discord-bot.sh ${{ secrets.DISCORD_TOKEN }}
       shell: bash
         
-    #- name: Test with pytest
-      #run: |
-        #pytest
+    - name: Test with pytest
+      run: |
+        pytest
