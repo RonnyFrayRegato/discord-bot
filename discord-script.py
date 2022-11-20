@@ -16,7 +16,7 @@ class DiscordBot(discord.Client):
         await tree.sync(guild=discord.Object(server_id))  # causes slash commands to refresh on bot startup
         self.synced = True
         print("Bot is online")
-        database-creation.connect_to_db()
+        database_creation.connect_to_db()
 
 # Global variables
 bot = DiscordBot()
