@@ -2,7 +2,7 @@ import sys
 import random
 import discord
 import scraping_google_images
-# import database_creation
+import database_creation
 from discord import app_commands
 from discord.ext import commands
 
@@ -15,18 +15,24 @@ server_id = 1030163730538954853
 @client.event
 async def on_ready():
     print("Bot is online")
-    # database_creation.connect_to_db()
+    database_creation.connect_to_db()
+    database_creation.init_table()
 
+@client.event
+async def on_message(message):
+    database_creation.increase_user_msg_count(message.author.id)
 
 @client.event
 async def on_member_join(member):
     channel = member.guild.system_channel  # get system channel
+    database_creation.init_user_for_msg_count(member.id)
     await channel.send(f"{member.mention} Welcome to the Server!")
 
 
 @client.event
 async def on_member_remove(member):
     channel = member.guild.system_channel
+    database_creation.delete_user_from_msg_count(member.id)
     await channel.send(f"Goodbye {member.mention}!")
 
 
@@ -34,6 +40,11 @@ async def on_member_remove(member):
 async def hello(ctx):
     await ctx.reply(f"Hey {ctx.author.mention}!")
 
+
+@client.command(name="myCount")
+async def hello(ctx):
+    count = database_creation.init_user_for_msg_count(ctx.author.id)
+    await ctx.reply(f"Hey {ctx.author.mention} your count is {count}!")
 
 # shows latency between bot and discord server
 @client.command(name="ping")

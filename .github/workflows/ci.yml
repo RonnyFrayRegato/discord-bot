@@ -27,7 +27,10 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
-        
+
+    - name: Set up MariaDB database using Docker
+      run: docker run -d -p 3306:3306 -e MYSQL_DATABASE=bot_dev -e MYSQL_ROOT_PASSWORD=rootpw --name mdb103 mariadb:10.3
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -38,7 +41,8 @@ jobs:
         pip install pillow
         pip install selenium
         pip install webdriver-manager
-        
+        pip install mariadb
+
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
