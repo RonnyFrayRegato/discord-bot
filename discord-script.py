@@ -1,4 +1,5 @@
 import random
+import sys
 import discord
 import scraping_google_images
 from discord import app_commands
@@ -76,4 +77,4 @@ async def image(ctx):
 
 
 # runs the bot using security token
-bot.run("__DISCORD_TOKEN__")
+bot.run(sys.argv[1])
