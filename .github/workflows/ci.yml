@@ -34,6 +34,10 @@ jobs:
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install git+https://github.com/Rapptz/discord.py
+        pip install requests
+        pip install pillow
+        pip install selenium
+        pip install webdriver-manager
         
     - name: Lint with flake8
       run: |
