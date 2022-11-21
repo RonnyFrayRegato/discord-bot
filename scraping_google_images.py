@@ -5,12 +5,15 @@ import io
 from PIL import Image
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 # Driver for ChromeDriver
+options = Options()
+options.add_argument("--headless")
 service = ChromeService(ChromeDriverManager().install())
-wd = webdriver.Chrome(service=service)
+wd = webdriver.Chrome(service=service, options=options)
 
 
 # Get and list images from Google

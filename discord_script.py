@@ -1,7 +1,8 @@
+import sys
 import random
 import discord
 import scraping_google_images
-import database_creation
+# import database_creation
 from discord import app_commands
 from discord.ext import commands
 
@@ -14,7 +15,7 @@ server_id = 1030163730538954853
 @client.event
 async def on_ready():
     print("Bot is online")
-    database_creation.connect_to_db()
+    # database_creation.connect_to_db()
 
 
 @client.event
@@ -64,4 +65,4 @@ async def image(ctx):
 
 
 # runs the bot using security token
-client.run("__DISCORD_TOKEN__")
+client.run(sys.argv[1])
