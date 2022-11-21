@@ -3,7 +3,7 @@ import discord
 import scraping_google_images
 from discord import app_commands
 from discord.ext import commands
-import database_creation
+#import database_creation
 
 
 class DiscordBot(discord.Client):
@@ -16,7 +16,7 @@ class DiscordBot(discord.Client):
         await tree.sync(guild=discord.Object(server_id))  # causes slash commands to refresh on bot startup
         self.synced = True
         print("Bot is online")
-        database_creation.connect_to_db()
+        #database_creation.connect_to_db()
 
 # Global variables
 bot = DiscordBot()
