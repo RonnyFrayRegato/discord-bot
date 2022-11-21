@@ -7,4 +7,4 @@ python discord-script.py ${DISCORD_TOKEN}
 
 sleep 60
 
-python discord-script.py exit
+python discord-script.py exit()
