@@ -7,9 +7,9 @@ name: CI for Discord Bot
 on:
   push:
   workflow_dispatch:
-  schedule:
+  #schedule:
     # trigger a build and run of the Discord bot daily at 5 AM PST / 12 PM UTC
-    - cron: '0 12 * * *'
+    #- cron: '0 12 * * *'
 
 permissions:
   contents: read
@@ -59,11 +59,7 @@ jobs:
         chmod +x discord-bot.sh
         ./discord-bot.sh ${{ secrets.DISCORD_TOKEN }}
       shell: bash
-
-    - name: Exit Discord Bot
-      run: exit()
-      shell: bash
         
-    #- name: Test with pytest
-      #run: |
-        #pytest
+    - name: Test with pytest
+      run: |
+        pytest
