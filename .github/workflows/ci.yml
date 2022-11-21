@@ -46,6 +46,14 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
+    - name: Set up Google Chrome
+      run:  |
+        sudo apt-get update
+        sudo apt-get --only-upgrade install google-chrome-stable
+
+    - name: Display Google Chrome version
+      run: google-chrome --version
+
     - name: Run Discord Bot
       run:  |
         chmod +x discord-bot.sh
