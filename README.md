@@ -20,10 +20,6 @@ the Discord bot:
   - On member leaving: Discord bot gives a farewell message to user leaving the server
 - Web-Scraping:
   - Searches the internet and retrieves an image to display in the Discord server
-  
-> **Note**
-> The web-scraping functionality is only compatible with prefix commands, while all other functionalities utilize slash
-> commands. A future release will allow all functionalities to utilize slash commands.
 
 ### MariaDB Set Up
 
@@ -33,4 +29,5 @@ Generate a MariaDB Docker Container and Create the Database Instance for the Dis
  ```
  
 ## Demonstration
+
 ![discord-bot](https://user-images.githubusercontent.com/71354370/202879000-b2af02d8-916e-4ad3-9ad0-35fa4952ae29.gif)
