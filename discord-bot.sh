@@ -6,5 +6,3 @@ DISCORD_TOKEN=${1}  # parameter is passed as an env through workflow file
 python discord_script.py ${DISCORD_TOKEN}
 
 sleep 60
-
-python discord-script.py exit()

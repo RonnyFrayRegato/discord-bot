@@ -59,7 +59,11 @@ jobs:
         chmod +x discord-bot.sh
         ./discord-bot.sh ${{ secrets.DISCORD_TOKEN }}
       shell: bash
+
+    - name: Exit Discord Bot
+      run: exit()
+      shell: bash
         
-    - name: Test with pytest
-      run: |
-        pytest
+    #- name: Test with pytest
+      #run: |
+        #pytest
