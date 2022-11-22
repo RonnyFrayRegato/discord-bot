@@ -1,4 +1,4 @@
-import psycopg2
+import mariadb
 import sys
 #run this command in linux to start the docker container with maria db
     #docker run -d -p 3306:3306 -e MYSQL_DATABASE=example -e MYSQL_ROOT_PASSWORD=password -e TZ=America/Los_Angeles --name mdb103 mariadb:10.3
@@ -12,15 +12,15 @@ global conn
 def connect_to_db():
     try:
         global conn
-        conn = psycopg2.connect(
+        conn = mariadb.connect(
             user="root",
-            password="rootpw",
+            password="password",
             host="127.0.0.1",
             port=3306,
-            database="bot_dev"
+            database="example"
         )
         print("connected")
-    except psycopg2.Error as e:
+    except mariadb.Error as e:
         print(f"Error connecting to MariaDB Platform: {e}")
         sys.exit(1)
     global cur

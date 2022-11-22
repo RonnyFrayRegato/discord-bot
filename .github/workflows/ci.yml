@@ -44,8 +44,7 @@ jobs:
         pip install pillow
         pip install selenium
         pip install webdriver-manager
-        pip install psycopg2-binary
-
+        pip install mariadb
 
     - name: Lint with flake8
       run: |
