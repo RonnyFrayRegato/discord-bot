@@ -44,7 +44,7 @@ jobs:
         pip install pillow
         pip install selenium
         pip install webdriver-manager
-        pip install postgres
+        pip install pyscopg2
 
     - name: Lint with flake8
       run: |
