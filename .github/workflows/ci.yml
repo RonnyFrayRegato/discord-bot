@@ -34,7 +34,7 @@ jobs:
     - name: install mariadb-connector
       run: |
         sudo apt-get update
-        sudo apt install mariadb-connector-c-devel gcc python-devel
+        sudo apt install gcc
 
     - name: Install dependencies
       run: |
