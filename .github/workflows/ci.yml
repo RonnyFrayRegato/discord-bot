@@ -37,6 +37,7 @@ jobs:
         sudo apt install gcc
         sudo apt install python3-dev
         sudo apt install openssl
+        pip install mariadb-connector-python
 
     - name: Install dependencies
       run: |
@@ -48,7 +49,7 @@ jobs:
         pip install pillow
         pip install selenium
         pip install webdriver-manager
-        pip3 install mariadb
+        pip install mariadb
 
     - name: Lint with flake8
       run: |
