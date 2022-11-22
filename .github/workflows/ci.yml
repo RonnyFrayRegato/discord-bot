@@ -34,7 +34,7 @@ jobs:
     - name: install mariadb-connector
       run: |
         sudo apt-get update
-        sudo apt dpkg --configure -a
+        sudo apt-get install -f
         sudo apt install wget
         wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
         echo "367a80b01083c34899958cdd62525104a3de6069161d309039e84048d89ee98b  mariadb_repo_setup" \
