@@ -47,9 +47,9 @@ async def mycount(ctx):
 # shows latency between bot and discord server
 @client.command(name="ping")
 async def ping(ctx):
-    print("in")
+
     await ctx.reply(f"Pong! Latency: {round(client.latency * 1000)}ms")
-    print("a bucket")
+
 
 
 # gets a user question and replies with a random response.
