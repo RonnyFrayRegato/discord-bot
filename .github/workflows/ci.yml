@@ -31,8 +31,10 @@ jobs:
     - name: Set up MariaDB database using Docker
       run: docker run -d -p 3306:3306 -e MYSQL_DATABASE=bot_dev -e MYSQL_ROOT_PASSWORD=rootpw --name mdb103 mariadb:10.3
 
-
-    - run: sudo apt install mariadb-connector-c-devel gcc python-devel
+    - name: install mariadb-connector
+      run:
+        sudo apt-get update
+        sudo apt install mariadb-connector-c-devel gcc python-devel
 
     - name: Install dependencies
       run: |
