@@ -42,7 +42,7 @@ jobs:
         sudo ./mariadb_repo_setup \
            --mariadb-server-version="mariadb-10.3"
     - name: test
-      run:
+      run: |
         sudo rm /usr/lib/x86_64-linux-gnu/libmysqlservices.a
         sudo apt-get install libmariadb3 libmariadb-dev
         
