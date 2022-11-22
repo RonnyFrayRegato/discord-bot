@@ -39,7 +39,7 @@ jobs:
         sudo apt install openssl
         sudo apt install wget
         wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
-        sudo ./mariadb_repo_setup \
+        sudo apt ./mariadb_repo_setup \
            --mariadb-server-version="mariadb-10.3"
         sudo apt install libmariadb3 libmariadb-dev
 
