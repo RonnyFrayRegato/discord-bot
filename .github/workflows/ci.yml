@@ -37,7 +37,11 @@ jobs:
         sudo apt install gcc
         sudo apt install python3-dev
         sudo apt install openssl
-        pip install mariadb-connector-python
+        sudo apt install wget
+        wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+        sudo ./mariadb_repo_setup \
+           --mariadb-server-version="mariadb-10.3"
+        sudo apt install libmariadb3 libmariadb-dev
 
     - name: Install dependencies
       run: |
