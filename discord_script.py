@@ -2,7 +2,7 @@ import sys
 import random
 import discord
 import scraping_google_images
-# import database_creation
+import database_creation
 from discord import app_commands
 from discord.ext import commands
 
@@ -15,18 +15,21 @@ server_id = 1030163730538954853
 @client.event
 async def on_ready():
     print("Bot is online")
-    # database_creation.connect_to_db()
+    database_creation.connect_to_db()
+    database_creation.init_table()
 
 
 @client.event
 async def on_member_join(member):
     channel = member.guild.system_channel  # get system channel
+    database_creation.init_user_for_msg_count(member.id)
     await channel.send(f"{member.mention} Welcome to the Server!")
 
 
 @client.event
 async def on_member_remove(member):
     channel = member.guild.system_channel
+    database_creation.delete_user_from_msg_count(member.id)
     await channel.send(f"Goodbye {member.mention}!")
 
 
@@ -35,10 +38,18 @@ async def hello(ctx):
     await ctx.reply(f"Hey {ctx.author.mention}!")
 
 
+@client.command(name="mycount")
+async def mycount(ctx):
+    count = database_creation.show_user_msg_count(ctx.author.id)
+    await ctx.reply(f"Hey {ctx.author.mention} your count is {count}!")
+
+
 # shows latency between bot and discord server
 @client.command(name="ping")
 async def ping(ctx):
+
     await ctx.reply(f"Pong! Latency: {round(client.latency * 1000)}ms")
+
 
 
 # gets a user question and replies with a random response.
@@ -50,7 +61,7 @@ async def eightball(ctx, *, question):
                  "You may rely on it", "Cannot predict now",
                  "The magic conch says no", "The magic conch says yes", "Most likely", "Better not tell you now",
                  "My reply is no", "My sources say no", "Very doubtful"]
-    await ctx.send(f":8ball: Question: {question}\n:8ball: Answer: {random.choice(responses)}")
+    await ctx.send(f"🎱 Question: {question}\n🎱 Answer: {random.choice(responses)}")
 
 
 @client.command(alias="shutdown")
@@ -62,6 +73,15 @@ async def shutdown(ctx):
 @client.command()
 async def image(ctx):
     await scraping_google_images.main(ctx)
+
+
+@client.event
+async def on_message(message):
+
+    database_creation.increase_user_msg_count(message.author.id)
+    await client.process_commands(message)
+
+
 
 
 # runs the bot using security token
