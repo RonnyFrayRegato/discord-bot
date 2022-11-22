@@ -11,8 +11,8 @@ on:
     # trigger a build and run of the Discord bot daily at 5 AM PST / 12 PM UTC
     #- cron: '0 12 * * *'
 
-permissions:
-  contents: read
+#permissions:
+  #contents: read
 
 jobs:
 
@@ -28,11 +28,21 @@ jobs:
       with:
         python-version: "3.10"
 
-    - name: Set up postgres database using Docker
-      run: docker run --name pg -e POSTGRES_DB=bot_dev -e POSTGRES_PASSWORD=rootpw -d -p 3306:3306 postgres
+    - name: Set up MariaDB database using Docker
+      run: docker run -d -p 3306:3306 -e MYSQL_DATABASE=example -e MYSQL_ROOT_PASSWORD=password --name mdb103 mariadb:10.3
 
+    - name: Configure Use of the CS Package Repository
+      run: |
+        sudo apt install wget
+        wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+        chmod +x mariadb_repo_setup
+        sudo ./mariadb_repo_setup \
+        --mariadb-server-version="mariadb-10.6"
 
-        
+    - name: Install MariaDB Connector/C
+      run: |
+        sleep 5
+        sudo apt install libmariadb3 libmariadb-dev
 
     - name: Install dependencies
       run: |
