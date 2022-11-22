@@ -10,7 +10,7 @@ global conn
 
 
 def connect_to_db():
-    conn = psycopg2.connect(database="bot_dev", user="root", password="rootpw", host="127.0.0.1", port="5432")
+    conn = psycopg2.connect(database="bot_dev", user="root", password="rootpw", host="localhost", port="5432")
 
     print("Opened database successfully")
     global cur
