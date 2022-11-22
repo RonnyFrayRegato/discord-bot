@@ -41,8 +41,8 @@ jobs:
         chmod +x mariadb_repo_setup
         sudo ./mariadb_repo_setup \
            --mariadb-server-version="mariadb-10.3"
-        sudo dpkg -i --force-overwrite /var/cache/apt/archives/libmariadb-dev_1%3a10.3.37+maria~ubu2004_amd64.deb
-        sudo apt-get -f install
+    -name: test
+      run:
         sudo apt-get install libmariadb3 libmariadb-dev
         
 
