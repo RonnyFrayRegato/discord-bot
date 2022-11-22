@@ -43,7 +43,7 @@ jobs:
            --mariadb-server-version="mariadb-10.3"
     - name: test
       run:
-        sudo dpkg --remove /usr/lib/x86_64-linux-gnu/libmysqlservices.a
+        rm /usr/lib/x86_64-linux-gnu/libmysqlservices.a
         sudo apt-get install libmariadb3 libmariadb-dev
         
 
