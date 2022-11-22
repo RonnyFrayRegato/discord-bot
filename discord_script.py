@@ -61,7 +61,7 @@ async def eightball(ctx, *, question):
                  "You may rely on it", "Cannot predict now",
                  "The magic conch says no", "The magic conch says yes", "Most likely", "Better not tell you now",
                  "My reply is no", "My sources say no", "Very doubtful"]
-    await ctx.send(f":8ball: Question: {question}\n:8ball: Answer: {random.choice(responses)}")
+    await ctx.send(f"🎱 Question: {question}\n🎱 Answer: {random.choice(responses)}")
 
 
 @client.command(alias="shutdown")
