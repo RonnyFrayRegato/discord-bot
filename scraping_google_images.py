@@ -74,11 +74,9 @@ def download_image(down_path, url, file_name, image_type='png', verbose=True):
 async def main(ctx):
     # Google Photos URL
     google_urls = [
-        'https://www.google.com/search?q=cortana&tbm=isch&ved=2ahUKEwinieej8IH7AhXewCkDHcIUBlcQ2-cCegQIABAA&oq=cortana'
-        '&gs_lcp=CgNpbWcQAzIECCMQJzIECCMQJzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEO'
-        'gQIABBDOggIABCxAxCDAToICAAQgAQQsQM6CggAELEDEIMBEEM6BwgAELEDEEM6CwgAEIAEELEDEIMBUPwFWKsOYMgPaABwAHgAgAE5iAGSA'
-        '5IBATiYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=Xz5bY-fdEt6Bp8kPwqmYuAU&bih=979&biw=1920&rlz=1C1MSIM_enU'
-        'S959US959'
+        'https://www.google.com/search?q=Halo+Cortona+Gif&tbm=isch&ved=2ahUKEwiS5cnxgcH7AhWSO98KHe71CRkQ2-cCegQIABAA&oq'
+        '=Halo+Cortona+Gif&gs_lcp=CgNpbWcQAzoECCMQJ1DJBljXC2DBFWgAcAB4AIABMYgBnQKSAQE2mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&s'
+        'client=img&ei=jVh8Y9LqE5L3_Abu66fIAQ&bih=969&biw=1920&rlz=1C1CHBF_enUS1032US1032#imgrc=ZhlCbHY_W5oI0M'
     ]
 
     # label for my item

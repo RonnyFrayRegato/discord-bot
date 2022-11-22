@@ -18,9 +18,6 @@ async def on_ready():
     database_creation.connect_to_db()
     database_creation.init_table()
 
-@client.event
-async def on_message(message):
-    database_creation.increase_user_msg_count(message.author.id)
 
 @client.event
 async def on_member_join(member):
@@ -41,15 +38,18 @@ async def hello(ctx):
     await ctx.reply(f"Hey {ctx.author.mention}!")
 
 
-@client.command(name="myCount")
-async def hello(ctx):
-    count = database_creation.init_user_for_msg_count(ctx.author.id)
+@client.command(name="mycount")
+async def mycount(ctx):
+    count = database_creation.show_user_msg_count(ctx.author.id)
     await ctx.reply(f"Hey {ctx.author.mention} your count is {count}!")
+
 
 # shows latency between bot and discord server
 @client.command(name="ping")
 async def ping(ctx):
+    print("in")
     await ctx.reply(f"Pong! Latency: {round(client.latency * 1000)}ms")
+    print("a bucket")
 
 
 # gets a user question and replies with a random response.
@@ -73,6 +73,15 @@ async def shutdown(ctx):
 @client.command()
 async def image(ctx):
     await scraping_google_images.main(ctx)
+
+
+@client.event
+async def on_message(message):
+
+    database_creation.increase_user_msg_count(message.author.id)
+    await client.process_commands(message)
+
+
 
 
 # runs the bot using security token
