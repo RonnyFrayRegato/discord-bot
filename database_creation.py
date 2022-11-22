@@ -10,19 +10,9 @@ global conn
 
 
 def connect_to_db():
-    try:
-        global conn
-        conn = psycopg2.connect(
-            user="root",
-            password="rootpw",
-            host="127.0.0.1",
-            port=3306,
-            database="bot_dev"
-        )
-        print("connected")
-    except psycopg2.Error as e:
-        print(f"Error connecting to MariaDB Platform: {e}")
-        sys.exit(1)
+    conn = psycopg2.connect(database="bot_dev", user="root", password="rootpw", host="127.0.0.1", port="5432")
+
+    print("Opened database successfully")
     global cur
     cur = conn.cursor()
 
